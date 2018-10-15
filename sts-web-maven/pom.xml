@@ -7,18 +7,19 @@
   <version>1.0.0-BUILD-SNAPSHOT</version>
   
     <properties>
-        <java-version>1.8</java-version>
+        <java-version>10</java-version>
         <!-- Spring -->
         <org.springframework-version>4.3.10.RELEASE</org.springframework-version>
         
 		<!-- Web -->
-		<jsp.version>2.2</jsp.version>
+		<jsp.version>2.1</jsp.version>
 		<jstl.version>1.2</jstl.version>
 		<servlet.version>3.1.0</servlet.version>
 		
 		<!-- Logging -->
-		<org.slf4j.version>1.7.5</org.slf4j.version>
-
+		<org.slf4j-version>1.7.5</org.slf4j-version>
+        <log4j-version>1.7.5</log4j-version>
+        
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
 
@@ -61,7 +62,7 @@
 			<version>${jstl.version}</version>
 		</dependency>
         
-        <!-- servlet dependency -->
+        <!-- Servlet dependency -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -70,26 +71,31 @@
 		</dependency>
 
 
-		<!-- Logging with SLF4J -->
+		<!-- Logging with SLF4J & LOG4J-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${org.slf4j-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${org.slf4j-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j-version}</version>
+            <scope>runtime</scope>
+        </dependency>
         
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<!-- Hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j-version}</version>
+        </dependency>
+        
 
 		
 		<!-- Test Artifacts -->
@@ -107,4 +113,41 @@
 		</dependency>
 
 	</dependencies>	
+    
+    
+    
+        <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <additionalProjectnatures>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalBuildcommands>
+                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            
+        </plugins>
+    </build>
+    
+    
 </project>
