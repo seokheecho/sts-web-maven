@@ -1,0 +1,108 @@
+[STS(Spring Tool Sutie) Web Project]
+**Eclipse Project 생성
+- [File]-[Project]-spring 검색 - "Spring Legacy Project" 선택
+- Templates 에서 Spring MVC Project 선택, Project name : (ex. sts-web-maven) 프로젝트명 기재 후 Next
+- specify the top-level package 지정 (ex. com.practice.web) package명 기재 후 Finish
+
+★프로젝트 생성 후 먼저 Java build 시 적용되는 version 확인하자!!!
+(아래 Java build 설정 방법 참조!)
+
+**HelloController 생성
+- HelloController.java (경로: java - com - practice - web - HelloController.java)
+- hello.jsp (경로: webapp - WEB-INF - views - hello.jsp)
+
+**Server 생성
+- New Server
+- Server name : (ex. sts-web-maven) 서버명 기재 후 Next
+- Add and Remove : sts-web-maven 선택 후  "Add>" , 프로젝트 선택 후 오른쪽으로 넘어 갔으면 Finish
+- Server Start
+
+**Browser 접속
+기본 경로 : localhost:8080/web/ , localhost:8080/web/hello
+
+**기본 경로 변경 방법
+- Servers - Server 더블클릭(Server-Tomcat 설정) - Overview 옆에 Modules 클릭
+- Path 경로 확인 - Edit - Path: /변경할 path명 - ok
+(보통 프로젝트명으로 변경 : /web -> /sts-web-maven 으로 변경)
+- Browser 접속
+변경된 경로 : localhost:8080/sts-web-maven , localhost:8080/sts-web-maven/hello
+
+***Java build 시 적용되는 version 확인!!!
+- Java build 버전 확인
+- pom.xml - java version 확인
+
+이번에 만드는 프로젝트 중 Spring 4.0으로 업그레이드하면서, Mybatis도 그마나 최신으로 올렸더니
+문제가 JDK 버전이 문제가 되어 스윽 지나치면서 홈페이지 보니, 10까지 나온 것 같다. 
+하지만, 무조건 최신이 좋은 것은 아니므로 8로 업하려 한다.
+현재 상황
+여러 프로젝트를 진행하고 있다.
+기존 프로젝트는 모두 JDK 1.7 버전으로 진행하고, 
+신규 프로젝트만 JDK 1.8 버전으로 진행하려 한다.
+
+항상 검색하면서 설정 부분들을 바꿔오다가 이젠 검색도 번거로워서 내 블로그에 정리하기로 하였다.
+FAQ
+Q) Java 버전 여러개 설치해도 괜찮나요 ? 
+A) 네, 기존 버전 폴더를 삭제하지 않는 한 가능합니다.
+
+Q) 프로젝트 별로 Java 버전을 수정할 수 있나요 ?
+A) 네, 지금 그것을 하려 합니다.
+프로젝트 선택하여 [Properties] 로 들어오기 ! 
+
+Java Compiler
+1. Java Compiler -> [Uncheck] Use Compliance from execution .. 체크를 해제하면  -> Level 설정이 가능하다.
+
+Java Build Path
+2. Java Build Path -> Libraries -> Jre 선택 -> Edit
+
+3. Alternate JRE 에서 [Installed JRE .. ] 선택
+
+4. [Add] 선택 -> Standard VM에서 [Next] -> JRE home [버튼] 눌러 경로를 가져오고, JRE name을 작성 -> [Finish]
+
+5. 한번더 [OK]
+
+Project Facets
+6. [Project Facets] - Java 버전도 변경하기!
+
+이것만 바꾸지 말고 pom.xml 도 수정하기
+	<properties>
+		<java-version>1.8</java-version> ----> 버전에 맞춰서 기재(ex .1.8 버젼으로 진행)
+		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.6.10</org.aspectj-version>
+		<org.slf4j-version>1.6.6</org.slf4j-version>
+	</properties>
+
+** - pom.xml 에 있는 <source>와 <target> 이 설정(기본설정 1.6)되어 있어 변경된 Java build가 바뀐다.
+따라서 "기존 1.6 -> ${java-version}" 변경 하여 위에 <properties> 설정된 <java-version>에 맞춰서 바뀌도록 한다.
+org.apache.maven.plugins 에서 지원되는 부분을 확인하고 Java 버전을 맞추도록하자!
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>${java-version}</source>  ----> 기존 1.6 -> ${java-version} 변경
+                    <target>${java-version}</target>   ----> 기존 1.6 -> ${java-version} 변경
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+
+
+**설정 적용했으면 Eclipse 종료하고 다시 재시작 하기!!!
+- 바로 maven update하면 변경 안된 java version으로 돌아간다.
+- pom.xml 에 있는 <source>와 <target> 이 설정(기본설정 1.6)되어 있어 변경된 Java build가 바뀐다.
+따라서 "기존 1.6 -> ${java-version}" 변경 하여 위에 <properties> 설정된 <java-version>에 맞춰서 바뀌도록 한다.
+org.apache.maven.plugins 에서 지원되는 부분을 확인하고 Java 버전을 맞추도록하자!
+
+참고 : https://smilennv.blog.me/221278742916
+[출처] Spring :: Java Version (자바 버전) 프로젝트별 변경하기|작성자 꽁뇽
+
+**설정파일 내용정리
+참고 : https://blog.naver.com/hopark1013/221375814573
+
+**maven 정리
+참고 : https://www.lesstif.com/pages/viewpage.action?pageId=14745653
+
+**maven-compiler-plugin 정리
+참고 : https://mincong-h.github.io/2018/08/29/maven-compiler-plugin-understanding/
