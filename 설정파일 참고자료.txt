@@ -16,7 +16,6 @@
 
 
 <!-- dbcp2 -->
-
 1. DBCP 란 무엇인가?
 DBCP란 Database Connection Pooling의 약자로 데이터베이스에 연결되는 패턴의 일종이다.
 (일종의 캐쉬 역할을 수행한다고 생각하면 좋다.)
@@ -52,36 +51,21 @@ https://github.com/swaldman/c3p0
 참고 : https://blog.naver.com/hahava/221369200088
 
 <!-- dbcp2 -->
-
   <dependency>
-      
 	<groupId>org.apache.commons</groupId>
-    
-	<artifactId>commons-dbcp2</artifactId>
-       
+	<artifactId>commons-dbcp2</artifactId>  
 	<version>${dbcp2.version}</version>
-        
 	<exclusions>
-           
 		<exclusion>
-                
 			<groupId>xerces</groupId>
-                
 			<artifactId>xercesImpl</artifactId>
-           
 		</exclusion>
-          
 		<exclusion>
-                  
 			<artifactId>commons-collections</artifactId>
-           
 			<groupId>commons-collections</groupId>
-     
 		</exclusion>
-       
 	</exclusions>
-      
-   </dependency>
+  </dependency>
 
 
 <!-- AspectJ -->
@@ -94,15 +78,10 @@ AspectJ는 최종 사용자를 위한 단순함과 이용성을 강조함으로써 폭넓게 사용되는 AOP�
 참고 : https://blog.outsider.ne.kr/845
 
 <!-- AspectJ -->
-        
   <dependency>
-            
 	<groupId>org.aspectj</groupId>
-            
 	<artifactId>aspectjrt</artifactId>
-            
 	<version>${org.aspectj-version}</version>
-        
   </dependency>
 
 
