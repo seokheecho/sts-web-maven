@@ -23,6 +23,10 @@
 	
 	<context:component-scan base-package="com.practice.web" />
 	
-	
+    <!-- 
+    <mvc:interceptors>
+        <beans:bean class="com.practice.web.login.LoginInterceptor"/>        
+    </mvc:interceptors>
+     -->
 	
 </beans:beans>
