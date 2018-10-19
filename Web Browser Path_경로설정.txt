@@ -1,0 +1,22 @@
+﻿[Web Browser Path - 경로설정]
+**Server
+- 포트 설정 : Overview - HTTP/1.1 Port Number 8080
+- 경로 설정 : Modules - Path 변경(sts-web-maven 프로젝트명으로 변경)
+
+**defaultRootSource 설정 
+Navigater - .settings - org.eclipse.wst.common.component
+
+**web.xml - 서버 경로 설정
+  <servlet-mapping>
+    <servlet-name>appServlet</servlet-name>
+    <url-pattern>/app/*</url-pattern>
+    <!-- front-backend 분리 시 서버쪽 경로("/")와 겹친다.
+                     따라서 서버쪽 경로를 "/app/*" 으로 변경해준다.
+    <url-pattern>/</url-pattern>
+    -->
+  </servlet-mapping>
+
+**Controller 경로
+- @RequestMapping(value="/testmember")
+- @RequestMapping(value="/add", method = RequestMethod.POST)
+
