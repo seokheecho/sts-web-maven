@@ -7,7 +7,7 @@ tmp/
 *.swp
 *~.nib
 local.properties
-!properties/
+!properties/**/*.properties
 .settings/
 .loadpath
 
