@@ -1,1 +1,1 @@
-sts-web-maven03 : 로그인
+sts-web-maven03 : 로그인 및 메인페이지(login & frame.html)
